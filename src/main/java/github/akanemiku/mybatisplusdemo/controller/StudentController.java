@@ -20,6 +20,14 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    /**
+     * 分页主页面
+     *
+     * @param page 当前页
+     * @param size 每页显示数
+     * @param model
+     * @return
+     */
     @GetMapping("/list")
     public String list(@RequestParam(value = "page", defaultValue = "1") long page,
                        @RequestParam(value = "size", defaultValue = "5") long size,
@@ -32,6 +40,13 @@ public class StudentController {
         return "student";
     }
 
+    /**
+     * 新增/修改页面
+     *
+     * @param studentId 学生id
+     * @param model
+     * @return
+     */
     @GetMapping("/edit")
     public String index(@RequestParam(value = "studentId", required = false) Integer studentId,
                         Model model) {
@@ -43,6 +58,13 @@ public class StudentController {
         return "studentEdit";
     }
 
+    /**
+     * 新增/修改
+     *
+     * @param student 学生实体
+     * @param model
+     * @return
+     */
     @PostMapping("/save")
     public String save(Student student,Model model){
         int rows;
@@ -65,6 +87,13 @@ public class StudentController {
         }
     }
 
+    /**
+     * 删除学生
+     *
+     * @param studentId 学生id
+     * @param model
+     * @return
+     */
     @GetMapping("/delete")
     public String delete(@RequestParam(value = "studentId", required = true) Integer studentId,
                          Model model) {

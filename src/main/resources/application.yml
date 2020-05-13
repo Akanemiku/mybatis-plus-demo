@@ -7,6 +7,7 @@ spring:
     username: root
     password: 6458
 
+# 添加后控制台无启动日志
 #logging:
 #  level:
 #    root: warn

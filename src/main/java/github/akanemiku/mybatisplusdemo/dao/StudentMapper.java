@@ -11,5 +11,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StudentMapper extends BaseMapper<Student> {
+    /**
+     * 自定义分页方法，查找所有学生
+     * @param page
+     * @param wrapper
+     * @return
+     */
     IPage<Student> findAll(Page<Student> page, @Param(Constants.WRAPPER) Wrapper<Student> wrapper);
 }
