@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/list">学生管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        学号
+                    </th>
+                    <th>
+                        姓名
+                    </th>
+                    <th>
+                        学院
+                    </th>
+                    <th colspan="3">
+                        操作
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student,studentStat:${students.getRecords()}">
+                    <td th:text="${student.getStudentId()}"></td>
+                    <td th:text="${student.getStudentNo()}"></td>
+                    <td th:text="${student.getName()}"></td>
+                    <td th:text="${student.getCollege()}"></td>
+                    <!--<td>-->
+                        <!--<a th:href="@{/mission/detail(missionId=${mission.getMissionId()})}">查看详情</a>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<a th:href="@{/mission/index(teacherId=${teacherNo},missionId=${mission.getMissionId()})}">编辑</a>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                        <!--<a th:href="@{/mission/delete(missionId=${mission.getMissionId()})}">删除</a>-->
+                    <!--</td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--分页-->
+        <div class="col-md-12 column">
+            <ul class="pagination pull-right">
+                <li th:class="${current le 1}?'disabled':''">
+                    <a th:if="${students.getCurrent() ne 1}" th:href="@{/student/list(page=${current - 1},size=${size})}">上一页</a>
+                    <a th:if="${students.getCurrent() eq 1}" href="javascript:void(0);">上一页</a>
+                </li>
+                <li th:each="page:${#numbers.sequence(1,students.getPages())}"
+                    th:class="${page eq students.getCurrent()}?'disabled':''">
+                    <a th:if="${page ne students.getCurrent()}" th:href="@{/student/list(page=${current},size=${size})}">
+                        <span th:text="${page}"></span>
+                    </a>
+                    <a th:if="${page eq students.getCurrent()}" href="javascript:void(0);">
+                        <span th:text="${page}"></span>
+                    </a>
+                </li>
+
+                <li th:class="${current ge students.getPages()}?'disabled':''">
+                    <a th:if="${students.getCurrent() ne students.getPages()}" th:href="@{/student/list(page=${current + 1},size=${size})}" id="next">下一页</a>
+                    <a th:if="${students.getCurrent() eq students.getPages()}" href="javascript:void(0);">下一页</a>
+                </li>
+            </ul>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+</body>
+</html>
