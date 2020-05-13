@@ -19,10 +19,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/list">学生管理系统</a>
+            <a class="navbar-brand" th:href="@{/student/list}">学生管理系统</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a th:href="@{/student/edit}">新增学生</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -46,7 +49,10 @@
                     <th>
                         学院
                     </th>
-                    <th colspan="3">
+                    <th>
+                        修改时间
+                    </th>
+                    <th colspan="2">
                         操作
                     </th>
                 </tr>
@@ -57,9 +63,7 @@
                     <td th:text="${student.getStudentNo()}"></td>
                     <td th:text="${student.getName()}"></td>
                     <td th:text="${student.getCollege()}"></td>
-                    <td>
-                        <a href="#">查看详情</a>
-                    </td>
+                    <td th:text="${#dates.format(student.getTime(), 'yyyy-MM-dd HH:mm')}"></td>
                     <td>
                         <a th:href="@{/student/edit(studentId=${student.getStudentId()})}">编辑</a>
                     </td>
@@ -75,12 +79,14 @@
         <div class="col-md-12 column">
             <ul class="pagination pull-right">
                 <li th:class="${current le 1}?'disabled':''">
-                    <a th:if="${students.getCurrent() ne 1}" th:href="@{/student/list(page=${current - 1},size=${size})}">上一页</a>
+                    <a th:if="${students.getCurrent() ne 1}"
+                       th:href="@{/student/list(page=${current - 1},size=${size})}">上一页</a>
                     <a th:if="${students.getCurrent() eq 1}" href="javascript:void(0);">上一页</a>
                 </li>
                 <li th:each="page:${#numbers.sequence(1,students.getPages())}"
                     th:class="${page eq students.getCurrent()}?'disabled':''">
-                    <a th:if="${page ne students.getCurrent()}" th:href="@{/student/list(page=${current},size=${size})}">
+                    <a th:if="${page ne students.getCurrent()}"
+                       th:href="@{/student/list(page=${current},size=${size})}">
                         <span th:text="${page}"></span>
                     </a>
                     <a th:if="${page eq students.getCurrent()}" href="javascript:void(0);">
@@ -88,12 +94,12 @@
                     </a>
                 </li>
                 <li th:class="${current ge students.getPages()}?'disabled':''">
-                    <a th:if="${students.getCurrent() ne students.getPages()}" th:href="@{/student/list(page=${current + 1},size=${size})}" id="next">下一页</a>
+                    <a th:if="${students.getCurrent() ne students.getPages()}"
+                       th:href="@{/student/list(page=${current + 1},size=${size})}" id="next">下一页</a>
                     <a th:if="${students.getCurrent() eq students.getPages()}" href="javascript:void(0);">下一页</a>
                 </li>
             </ul>
         </div>
-
 
 
     </div>
