@@ -57,15 +57,15 @@
                     <td th:text="${student.getStudentNo()}"></td>
                     <td th:text="${student.getName()}"></td>
                     <td th:text="${student.getCollege()}"></td>
-                    <!--<td>-->
-                        <!--<a th:href="@{/mission/detail(missionId=${mission.getMissionId()})}">查看详情</a>-->
-                    <!--</td>-->
-                    <!--<td>-->
-                        <!--<a th:href="@{/mission/index(teacherId=${teacherNo},missionId=${mission.getMissionId()})}">编辑</a>-->
-                    <!--</td>-->
-                    <!--<td>-->
-                        <!--<a th:href="@{/mission/delete(missionId=${mission.getMissionId()})}">删除</a>-->
-                    <!--</td>-->
+                    <td>
+                        <a href="#">查看详情</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/student/edit(studentId=${student.getStudentId()})}">编辑</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/student/delete(studentId=${student.getStudentId()})}">删除</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -87,7 +87,6 @@
                         <span th:text="${page}"></span>
                     </a>
                 </li>
-
                 <li th:class="${current ge students.getPages()}?'disabled':''">
                     <a th:if="${students.getCurrent() ne students.getPages()}" th:href="@{/student/list(page=${current + 1},size=${size})}" id="next">下一页</a>
                     <a th:if="${students.getCurrent() eq students.getPages()}" href="javascript:void(0);">下一页</a>

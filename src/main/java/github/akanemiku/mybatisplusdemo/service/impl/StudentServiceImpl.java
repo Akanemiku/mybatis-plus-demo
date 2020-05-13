@@ -29,4 +29,19 @@ public class StudentServiceImpl implements StudentService {
     public int deleteById(int studentId) {
         return studentMapper.deleteById(studentId);
     }
+
+    @Override
+    public Student findById(long studentId) {
+        return studentMapper.selectById(studentId);
+    }
+
+    @Override
+    public int insertStudent(Student student) {
+        return studentMapper.insert(student);
+    }
+
+    @Override
+    public int updateById(Student student) {
+        return studentMapper.updateById(student);
+    }
 }
